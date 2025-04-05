@@ -3,7 +3,7 @@ import { SimpleGrid } from '@chakra-ui/react';
 import { RecipeCard } from './RecipeCard';
 
 export const RecipeGrid = () => (
-    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
+    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} mt={6}>
         <RecipeCard
             image='stewed-potatoes.png'
             title='Картошка, тушенная с болгарским перцем'

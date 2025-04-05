@@ -1,62 +1,109 @@
-// components/HeroSection.tsx
-import { Box, Flex, Heading, Input, Button, useBreakpoint, Text } from '@chakra-ui/react';
+import {
+    Box,
+    Flex,
+    Heading,
+    Input,
+    Button,
+    useBreakpoint,
+    Text,
+    ResponsiveValue,
+} from '@chakra-ui/react';
+import { Property } from 'csstype';
+import { useState } from 'react';
 
 interface HeroSectionProps {
     selectedCategory: string | null;
 }
 
+interface HeadingDimensions {
+    size: string;
+    lineHeight: string;
+    textAlign: ResponsiveValue<Property.TextAlign>;
+}
+
 export const HeroSection = ({ selectedCategory }: HeroSectionProps) => {
     const breakpoint = useBreakpoint();
+    const [isChecked, setIsChecked] = useState(false);
 
     const getDimensions = () => {
         switch (breakpoint) {
             case '2xl':
                 return {
-                    container: { w: '898px', h: '248px', p: '32px 0 0 0' },
+                    container: {
+                        w: '898px',
+                        h: 'auto',
+                        p: '32px 0 0 0',
+                    },
                     search: { w: '518px', h: '48px' },
                     filter: { w: '518px', h: '40px' },
                     button: { w: '48px', h: '48px', p: '0 12px' },
-                    heading: { size: '48px', lineHeight: '100%' },
+                    heading: {
+                        size: '48px',
+                        lineHeight: '100%',
+                        textAlign: 'center',
+                    } as HeadingDimensions,
                 };
             case 'xl':
                 return {
-                    container: { w: '578px', h: '248px', p: '32px 0 0 0' },
+                    container: {
+                        w: '578px',
+                        h: 'auto',
+                        p: '32px 0 0 0',
+                    },
                     search: { w: '378px', h: '48px' },
                     filter: { w: '458px', h: '40px' },
                     button: { w: '48px', h: '48px', p: '0 12px' },
-                    heading: { size: '36px', lineHeight: '100%' },
+                    heading: {
+                        size: '48px',
+                        lineHeight: '100%',
+                        textAlign: 'center',
+                    } as HeadingDimensions,
                 };
             case 'md':
                 return {
-                    container: { w: '727px', h: '80px', p: '16px 0 0 0' },
+                    container: {
+                        w: '727px',
+                        h: 'auto',
+                        p: '16px 0 0 0',
+                    },
                     search: { w: '448px', h: '32px' },
                     button: { w: '32px', h: '32px', p: '0 9px' },
-                    heading: { size: '24px', lineHeight: '133%' },
+                    heading: {
+                        size: '24px',
+                        lineHeight: '133%',
+                        textAlign: 'center',
+                    } as HeadingDimensions,
                 };
             default:
                 return {
-                    container: { w: '328px', h: '80px', p: '0' },
+                    container: {
+                        w: '328px',
+                        h: 'auto',
+                        p: '0',
+                    },
                     search: { w: '100%', h: '32px' },
                     button: { w: '32px', h: '32px', p: '0 9px' },
-                    heading: { size: '36px', lineHeight: '100%' },
+                    heading: {
+                        size: '24px',
+                        lineHeight: '133%',
+                        textAlign: 'center',
+                    } as HeadingDimensions,
                 };
         }
     };
 
     const dimensions = getDimensions();
-    const isMd = breakpoint === 'md';
-    const is2xl = breakpoint === '2xl';
-    const isXl = breakpoint === 'xl';
     const isDesktop = ['xl', '2xl'].includes(breakpoint);
+    const isMd = breakpoint === 'md';
 
     const renderHeading = () => (
         <Heading
             as='h1'
-            fontFamily={isMd || isXl ? 'var(--font-family)' : 'Inter, sans-serif'}
+            fontFamily='var(--font-family)'
             fontWeight='700'
             fontSize={dimensions.heading.size}
             lineHeight={dimensions.heading.lineHeight}
-            textAlign={isMd || is2xl ? 'center' : 'left'}
+            textAlign={dimensions.heading.textAlign}
             color='#000'
             mb={isMd ? 2 : 6}
         >
@@ -66,20 +113,74 @@ export const HeroSection = ({ selectedCategory }: HeroSectionProps) => {
 
     const renderFilters = () => (
         <Flex gap={4} w={dimensions.filter?.w} h={dimensions.filter?.h}>
-            <Button
-                variant='outline'
-                p='6px 0 6px 8px'
-                w='268px'
-                h='36px'
-                bg='white'
-                borderRadius='9999px'
-                justifyContent='space-between'
-            >
-                <Flex align='center' gap={2}>
-                    <svg width='34' height='20' viewBox='0 0 34 20' fill='none'>
-                        <rect width='34' height='20' rx='10' fill='black' fillOpacity='0.16' />
-                        <circle cx='10' cy='10' r='8' fill='white' />
-                    </svg>
+            {isDesktop ? (
+                <Flex align='center' gap='16px'>
+                    <Text
+                        fontFamily='var(--font-family)'
+                        fontWeight='500'
+                        fontSize='16px'
+                        lineHeight='150%'
+                        color='#000'
+                    >
+                        Исключить мои аллергены
+                    </Text>
+                    <Box
+                        position='relative'
+                        w='34px'
+                        h='20px'
+                        onClick={() => setIsChecked(!isChecked)}
+                        cursor='pointer'
+                        role='switch'
+                        aria-checked={isChecked}
+                    >
+                        <svg width='34' height='20' viewBox='0 0 34 20' fill='none'>
+                            <rect width='34' height='20' rx='10' fill='black' fillOpacity='0.16' />
+                            <circle
+                                cx={isChecked ? '24' : '10'}
+                                cy='10'
+                                r='8'
+                                fill='white'
+                                style={{ transition: 'cx 0.2s ease-in-out' }}
+                            />
+                        </svg>
+                    </Box>
+                </Flex>
+            ) : (
+                <Button
+                    variant='outline'
+                    p='6px 0 6px 8px'
+                    w='268px'
+                    h='36px'
+                    bg='white'
+                    borderRadius='9999px'
+                    justifyContent='space-between'
+                >
+                    <Flex align='center' gap={2}>
+                        <svg width='34' height='20' viewBox='0 0 34 20' fill='none'>
+                            <rect width='34' height='20' rx='10' fill='black' fillOpacity='0.16' />
+                            <circle cx='10' cy='10' r='8' fill='white' />
+                        </svg>
+                        <Text
+                            fontFamily='var(--font-family)'
+                            fontWeight='400'
+                            fontSize='16px'
+                            lineHeight='150%'
+                            color='rgba(0, 0, 0, 0.64)'
+                        >
+                            Исключить мои аллергены
+                        </Text>
+                    </Flex>
+                </Button>
+            )}
+
+            {isDesktop && (
+                <Button
+                    variant='outline'
+                    w='234px'
+                    h='40px'
+                    borderRadius='6px'
+                    justifyContent='space-between'
+                >
                     <Text
                         fontFamily='var(--font-family)'
                         fontWeight='400'
@@ -87,34 +188,16 @@ export const HeroSection = ({ selectedCategory }: HeroSectionProps) => {
                         lineHeight='150%'
                         color='rgba(0, 0, 0, 0.64)'
                     >
-                        Исключить мои аллергены
+                        Выберите из списка...
                     </Text>
-                </Flex>
-            </Button>
-
-            <Button
-                variant='outline'
-                w='234px'
-                h='40px'
-                borderRadius='9999px'
-                justifyContent='space-between'
-            >
-                <Text
-                    fontFamily='var(--font-family)'
-                    fontWeight='400'
-                    fontSize='16px'
-                    lineHeight='150%'
-                    color='rgba(0, 0, 0, 0.64)'
-                >
-                    Выберите из списка...
-                </Text>
-                <svg width='20' height='20' viewBox='0 0 20 20' fill='none'>
-                    <path
-                        d='M10.0001 10.9767L14.1251 6.85165L15.3034 8.02999L10.0001 13.3333L4.69678 8.02999L5.87511 6.85165L10.0001 10.9767Z'
-                        fill='#2D3748'
-                    />
-                </svg>
-            </Button>
+                    <svg width='20' height='20' viewBox='0 0 20 20' fill='none'>
+                        <path
+                            d='M10.0001 10.9767L14.1251 6.85165L15.3034 8.02999L10.0001 13.3333L4.69678 8.02999L5.87511 6.85165L10.0001 10.9767Z'
+                            fill='#2D3748'
+                        />
+                    </svg>
+                </Button>
+            )}
         </Flex>
     );
 
@@ -125,6 +208,7 @@ export const HeroSection = ({ selectedCategory }: HeroSectionProps) => {
             h={dimensions.container.h}
             bg='white'
             mx='auto'
+            mb={6}
         >
             {renderHeading()}
 
