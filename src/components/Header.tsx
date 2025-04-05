@@ -24,7 +24,7 @@ export const Header = () => {
             {/* Левый блок: Логотип + Главная (только для 1440 и 1920) */}
             <Flex alignItems='center' gap={{ xl: 8, '2xl': 12 }}>
                 <Image
-                    src={`/img/MenuItem/${isMobile ? 'logo.svg' : 'logo_yeedaa.svg'}`}
+                    src={`/img/${isMobile ? 'logo.svg' : 'logo_yeedaa.svg'}`}
                     alt='Yeedaa Logo'
                     w={{ base: '32px', md: '132.5px' }}
                     h={{ base: '32px', md: '32px' }}
@@ -70,12 +70,7 @@ export const Header = () => {
                                 h='24px'
                                 justifyContent='center'
                             >
-                                <Image
-                                    src={`/img/profile_notification/${icon}`}
-                                    alt={icon}
-                                    w='12px'
-                                    h='12px'
-                                />
+                                <Image src={`/img/${icon}`} alt={icon} w='12px' h='12px' />
                                 <Text fontSize='sm' color='green.600' fontWeight='600'>
                                     {idx === 0 ? '185' : idx === 1 ? '589' : '587'}
                                 </Text>
@@ -96,7 +91,7 @@ export const Header = () => {
                     justifyContent='flex-end'
                 >
                     <Avatar
-                        src='/img/MenuItem/Avatar.svg'
+                        src='/img/Avatar.svg'
                         size='48px'
                         borderRadius='9999px'
                         bg='#a0aec0'

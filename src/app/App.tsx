@@ -1,20 +1,28 @@
-// src/app/App.tsx
-import { Box } from '@chakra-ui/react';
-import { Header } from '../components/Header/Header';
-import { Section } from '../components/Section/Section';
+// App.tsx
+import { Box, Flex } from '@chakra-ui/react';
+import { Header } from '../components/Header';
+import { HeroSection } from '../components/HeroSection';
+import { CategoryFilter } from '../components/CategoryFilter';
+import { RecipeGrid } from '../components/RecipeGrid';
+import { ActionFooter } from '../components/ActionFooter';
 
 export default function App() {
     return (
-        <Box mx='auto' p={{ base: 0, md: 0, xl: 0 }}>
+        <Box>
             <Header />
 
-            <Section title='Новые рецепты'>
-                <Box px={{ base: 4, md: 8, xl: 120 }}>Пример содержимого секции</Box>
-            </Section>
+            <Flex direction={{ base: 'column', lg: 'row' }} p={4} gap={8}>
+                <Box flexShrink={0} w={{ lg: '300px' }}>
+                    <CategoryFilter />
+                </Box>
 
-            <Section title='Популярные блюда'>
-                <Box px={{ base: 4, md: 8, xl: 120 }}>Еще один пример</Box>
-            </Section>
+                <Box flex={1}>
+                    <HeroSection />
+                    <RecipeGrid />
+                </Box>
+            </Flex>
+
+            <ActionFooter />
         </Box>
     );
 }
