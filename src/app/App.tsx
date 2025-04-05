@@ -5,19 +5,22 @@ import { HeroSection } from '../components/HeroSection';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { RecipeGrid } from '../components/RecipeGrid';
 import { ActionFooter } from '../components/ActionFooter';
+import { useState } from 'react';
 
 export default function App() {
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
     return (
         <Box>
             <Header />
 
             <Flex direction={{ base: 'column', lg: 'row' }} p={4} gap={8}>
                 <Box flexShrink={0} w={{ lg: '300px' }}>
-                    <CategoryFilter />
+                    <CategoryFilter onCategorySelect={setSelectedCategory} />
                 </Box>
 
                 <Box flex={1}>
-                    <HeroSection />
+                    <HeroSection selectedCategory={selectedCategory} />
                     <RecipeGrid />
                 </Box>
             </Flex>
