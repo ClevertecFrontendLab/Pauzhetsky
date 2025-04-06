@@ -1,4 +1,3 @@
-// /components/HeroSection
 import {
     Box,
     Flex,
@@ -108,7 +107,7 @@ export const HeroSection = ({ selectedCategory }: HeroSectionProps) => {
             color='#000'
             mb={isMd ? 2 : 6}
         >
-            {selectedCategory === 'Веганская кухня' ? 'Веганская кухня' : 'Приятного аппетита!'}
+            {selectedCategory || 'Приятного аппетита!'}
         </Heading>
     );
 

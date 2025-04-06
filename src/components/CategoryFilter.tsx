@@ -39,12 +39,11 @@ export const CategoryFilter = ({ onCategorySelect }: CategoryFilterProps) => {
     ];
 
     const handleCategoryClick = (label: string) => {
-        const isVegan = label === 'Веганская кухня';
         const newOpenedCategory = openedCategory === label ? null : label;
 
         setOpenedCategory(newOpenedCategory);
-        setSelectedCategory(isVegan ? newOpenedCategory : null);
-        onCategorySelect(isVegan ? newOpenedCategory : null);
+        setSelectedCategory(newOpenedCategory);
+        onCategorySelect(newOpenedCategory);
     };
 
     if (!['xl', '2xl'].includes(breakpoint)) return null;
