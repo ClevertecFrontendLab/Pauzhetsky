@@ -26,9 +26,22 @@ export const Header = () => {
                 <Image
                     src={`/img/${isMobile ? 'logo.svg' : 'logo_yeedaa.svg'}`}
                     alt='Yeedaa Logo'
-                    w={{ base: '32px', md: '136px' }}
-                    h={{ base: '32px', md: '32px' }}
-                    mr={{ xl: '128px', '2xl': '128px' }}
+                    w={{
+                        base: '32px',
+                        md: '203px',
+                        lg: '136px',
+                    }}
+                    h={{
+                        base: '32px',
+                        md: '24px',
+                        lg: '32px',
+                    }}
+                    mr={{
+                        base: '53px',
+                        md: '334px',
+                        xl: '128px',
+                        '2xl': '128px',
+                    }}
                 />
 
                 {(is1440 || is1920) && (
@@ -55,12 +68,12 @@ export const Header = () => {
             {/* Центральные иконки для планшетов и мобильных */}
             {(isTablet || isMobile) && (
                 <Flex
-                    gap={6}
-                    position='absolute'
-                    left='50%'
-                    transform='translateX(-50%)'
+                    gap={{ base: 6, md: 4 }}
                     alignItems='center'
                     h='24px'
+                    position={{ base: 'absolute', md: 'static' }}
+                    left={{ base: '50%', md: 'unset' }}
+                    transform={{ base: 'translateX(-50%)', md: 'none' }}
                 >
                     {['BsBookmarkHeart.svg', 'BsPeopleFill.svg', 'BsEmojiHeartEyes.svg'].map(
                         (icon, idx) => (
@@ -68,12 +81,21 @@ export const Header = () => {
                                 key={idx}
                                 alignItems='center'
                                 gap={1}
-                                w='53px'
+                                w={{ base: '53px', md: '56px' }}
                                 h='24px'
+                                p={{ md: '0px 8px' }}
+                                borderRadius={{ md: '6px' }}
+                                bg='transparent'
                                 justifyContent='center'
                             >
                                 <Image src={`/img/${icon}`} alt={icon} w='12px' h='12px' />
-                                <Text fontSize='sm' color='green.600' fontWeight='600'>
+                                <Text
+                                    fontFamily='var(--font-family)'
+                                    fontWeight='600'
+                                    fontSize='12px'
+                                    lineHeight='133%'
+                                    color='#2db100'
+                                >
                                     {idx === 0 ? '185' : idx === 1 ? '589' : '587'}
                                 </Text>
                             </Flex>
@@ -82,7 +104,7 @@ export const Header = () => {
                 </Flex>
             )}
 
-            {/* Правый блок для десктопа */}
+            {/* Правый блок только для десктопа */}
             {isDesktop && (
                 <Flex
                     alignItems='center'
@@ -122,7 +144,7 @@ export const Header = () => {
                 </Flex>
             )}
 
-            {/* Бургер-меню для мобильных */}
+            {/* Бургер-меню для мобильных и планшетов */}
             {!isDesktop && (
                 <Box
                     display='flex'
