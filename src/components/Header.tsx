@@ -21,13 +21,14 @@ export const Header = () => {
             position='relative'
             minH={{ base: '64px', md: '80px' }}
         >
-            {/* Левый блок: Логотип + Главная (только для 1440 и 1920) */}
-            <Flex alignItems='center' gap={{ xl: 8, '2xl': 12 }}>
+            {/* Левый блок: Логотип + Главная */}
+            <Flex alignItems='center'>
                 <Image
                     src={`/img/${isMobile ? 'logo.svg' : 'logo_yeedaa.svg'}`}
                     alt='Yeedaa Logo'
-                    w={{ base: '32px', md: '132.5px' }}
+                    w={{ base: '32px', md: '136px' }}
                     h={{ base: '32px', md: '32px' }}
+                    mr={{ xl: '128px', '2xl': '128px' }}
                 />
 
                 {(is1440 || is1920) && (
@@ -36,6 +37,7 @@ export const Header = () => {
                         h='24px'
                         display='flex'
                         alignItems='center'
+                        justifyContent='flex-start'
                     >
                         <Text
                             fontFamily='Inter, sans-serif'
