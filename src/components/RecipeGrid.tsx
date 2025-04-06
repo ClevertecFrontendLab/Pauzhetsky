@@ -39,7 +39,12 @@ export const RecipeGrid = () => {
             spacing: 4,
         },
         base: {
-            container: { w: '328px', h: '644px' },
+            container: {
+                w: '100%',
+                h: '644px',
+                maxW: '328px',
+                px: 4,
+            },
             columns: 1,
             spacing: 4,
         },
@@ -129,16 +134,17 @@ export const RecipeGrid = () => {
 
             {/* Самое сочное */}
             <Box
-                w={gridSettings?.container.w}
-                h={gridSettings?.container.h}
+                {...gridSettings?.container}
                 mx='auto'
                 position='relative'
+                mb={useBreakpointValue({ base: '32px', md: '0' })}
             >
                 <Flex
                     justify='space-between'
                     align='center'
                     mb={6}
                     direction={{ base: 'column', md: 'row' }}
+                    gap={{ base: 4, md: 0 }}
                 >
                     <Heading as='h2' size='lg'>
                         Самое сочное
@@ -155,20 +161,8 @@ export const RecipeGrid = () => {
                             _hover={{ bg: '#9de326' }}
                             _active={{ bg: '#8acb20' }}
                             {...useBreakpointValue({
-                                '2xl': {
-                                    w: '197px',
-                                    h: '48px',
-                                    fontSize: '18px',
-                                    lineHeight: '156%',
-                                    px: '24px',
-                                },
-                                xl: {
-                                    w: '167px',
-                                    h: '40px',
-                                    fontSize: '16px',
-                                    lineHeight: '150%',
-                                    px: '16px',
-                                },
+                                '2xl': { w: '197px', h: '48px', fontSize: '18px' },
+                                xl: { w: '167px', h: '40px', fontSize: '16px' },
                             })}
                         >
                             Вся подборка →
@@ -176,7 +170,11 @@ export const RecipeGrid = () => {
                     </Box>
                 </Flex>
 
-                <SimpleGrid columns={gridSettings?.columns} spacing={gridSettings?.spacing}>
+                <SimpleGrid
+                    columns={gridSettings?.columns}
+                    spacing={gridSettings?.spacing}
+                    mt={{ base: '12px', md: '0' }}
+                >
                     {[
                         {
                             id: 5,
@@ -208,14 +206,14 @@ export const RecipeGrid = () => {
                     ))}
                 </SimpleGrid>
 
-                <Flex display={{ base: 'flex', md: 'none' }} justify='center' mt={6} mb={4}>
+                <Flex display={{ base: 'flex', md: 'none' }} justify='center' mt={4} w='100%'>
                     <Button
                         variant='solid'
                         bg='#b1ff2e'
                         borderRadius='6px'
-                        w='167px'
+                        w='100%'
+                        maxW='296px'
                         h='40px'
-                        px='16px'
                         fontFamily='var(--font-family)'
                         fontWeight='600'
                         fontSize='16px'
